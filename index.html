@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Birthday Surprise</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to top right, #ffe6f0, #fffaf0);
+      text-align: center;
+      padding-top: 80px;
+      overflow: hidden;
+    }
+    h1 {
+      color: #e91e63;
+      font-size: 3.5rem;
+      animation: bounce 1.5s infinite alternate;
+    }
+    h4{
+        color: #e91e63;
+      font-size: 3.5rem;
+      animation: bounce 1.5s infinite alternate;
+    }
+    @keyframes bounce {
+      to {
+        transform: translateY(-10px);
+      }
+    }
+    button {
+      padding: 14px 28px;
+      font-size: 1.3rem;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: 0.3s ease;
+    }
+    button:hover {
+      background-color: #ff1493;
+      transform: scale(1.05);
+    }
+    #surprise {
+      display: none;
+      margin-top: 40px;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    img {
+      max-width: 400px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎂 Happy Birthday! 🎉</h1>
+  <div>
+    <h4 style="font-size: 2rem;">yavagu nemdhii agii eru!🙌❤️</h4>
+  </div>
+  <button onclick="showSurprise()">Click for Surprise</button>
+
+  <div id="surprise">
+    <img src="birthday.jpg" alt="Birthday Surprise">
+  </div>
+
+  <!-- 🎵 Background Music -->
+  <audio id="bg-music" src="happy-birthday-314197.mp3" loop></audio>
+
+  <!-- 🎊 Confetti Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    const music = document.getElementById('bg-music');
+    const canvas = document.getElementById('confetti-canvas');
+    canvas.width = window.innerWidth;
+    canvas.width = window.innerWidth;
+   
+
+    function showSurprise() {
+      document.getElementById("surprise").style.display = "block";
+      music.play();
+
+      // Launch confetti 🎊
+      const duration = 3 * 1000;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 6,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+        });
+        confetti({
+          particleCount: 6,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+  </script>
+
+</body>
+</html>
